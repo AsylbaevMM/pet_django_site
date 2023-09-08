@@ -1,0 +1,7 @@
+mysite/ignorefile.py
+.idea/
+Lib/
+Scripts/
+db.sqlite3
+pyvenv.cfg
+
