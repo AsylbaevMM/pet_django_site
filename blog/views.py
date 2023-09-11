@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from django.db.models import Count
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 
 
 
@@ -58,9 +58,6 @@ def post_detail(request, year, month, day, post):
                    'comments': comments,
                    'form': form,
                    'similar_posts': similar_posts})
-
-
-
 
 
 def post_share(request, post_id):
@@ -123,8 +120,8 @@ def post_search(request):
         if form.is_valid():
             query = form.cleaned_data['query']
             results = Post.published.annotate(
-                search = SearchVector('title', 'body'),
-            ).filter(search=query)
+                similarity=TrigramSimilarity('title', query),
+            ).filter(similarity__gt=0.1).order_by('-similarity')
 
     return render(request,
                   'blog/post/search.html',
