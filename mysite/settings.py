@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from .ignorefile import SECRET_KEY, DATABASEPASS
+from .ignorefile import SECRET_KEY, DATABASEPASS, EMAIL, EMAILPASS
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'accounts.apps.AccountsConfig',
     'taggit',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -138,8 +139,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Конфигурация сервера электронной почты
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'your_account@gmail.com'
-EMAIL_HOST_PASSWORD = 'example'
+EMAIL_HOST_USER = EMAIL
+EMAIL_HOST_PASSWORD = EMAILPASS
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
