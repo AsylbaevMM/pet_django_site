@@ -46,7 +46,7 @@
                 {{ comment.created }},
                 {{ comment.created|timesince }}
             </p>
-            {{ comment.body|linebreaks }}
+            {{ comment.body|safe }}
         </div>
     {% empty %}
         <p>There are no comments.</p>

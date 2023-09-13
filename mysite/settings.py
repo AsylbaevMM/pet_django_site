@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
     'social_django',
+    'django_summernote',
 
 ]
 
@@ -173,3 +174,7 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
+
+SUMMERNOTE_THEME = 'bs5'  # Включить в summernote поддержку Bootstrap5
+
+

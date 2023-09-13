@@ -11,7 +11,7 @@
     {% endif %}
 
     {% for post in posts %}
-        <h2>
+        <p><h2>
             <a href="{{ post.get_absolute_url }}">
                 {{ post.title }}
             </a>
@@ -24,8 +24,7 @@
         </p>
         <p class="date">
             Published {{ post.publish }} by {{ post.author }}
-        </p>
-        {{ post.body|markdown|truncatewords:30|linebreaks }}
+        {{ post.body|markdown|truncatewords:30|safe }}
     {% endfor %}
     {% include "pagination.html" with page=posts %}
 {% endblock %}
