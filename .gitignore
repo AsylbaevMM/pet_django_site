@@ -5,3 +5,4 @@ Scripts/
 db.sqlite3
 pyvenv.cfg
 __pycache__/
+.env
