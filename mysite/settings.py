@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'social_django',
     'django_summernote',
+    'django_bootstrap5',
 
 ]
 

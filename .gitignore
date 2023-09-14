@@ -6,3 +6,5 @@ db.sqlite3
 pyvenv.cfg
 __pycache__/
 .env
+media/django-summernote/
+media/profile_images
