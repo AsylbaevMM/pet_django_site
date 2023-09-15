@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'social_django',
     'django_summernote',
     'django_bootstrap5',
-
+    "rest_framework",
+    'blog_api.apps.BlogApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -178,4 +179,8 @@ MEDIA_URL = '/media/'
 
 SUMMERNOTE_THEME = 'bs5'  # Включить в summernote поддержку Bootstrap5
 
-
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+}
