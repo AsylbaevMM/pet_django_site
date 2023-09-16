@@ -6,11 +6,20 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def get_queryset(self):
-        user = self.request.user
-        return Post.objects.filter(author=user)
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return Post.objects.filter(author=user)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class UserPostList(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        user = self.kwargs['username']
+        return Post.objects.filter(author=user)
