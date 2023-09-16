@@ -3,6 +3,8 @@ from blog.models import Post
 from .serializers import PostSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
+from .permissions import IsAuthorOrReadOnly
+
 
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 8
@@ -10,6 +12,7 @@ class StandardResultsSetPagination(PageNumberPagination):
     max_page_size = 10
 
 class PostList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthorOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     filter_backends = [DjangoFilterBackend]
@@ -25,6 +28,7 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthorOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
