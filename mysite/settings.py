@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'django_summernote',
     'django_bootstrap5',
     "rest_framework",
-    'blog_api.apps.BlogApiConfig'
+    'blog_api.apps.BlogApiConfig',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -183,4 +185,5 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'] ,
 }
