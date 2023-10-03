@@ -1,14 +1,13 @@
 {% extends "blog/base.html" %} {% load blog_tags %}
 
-{% block title %}Search{% endblock %}
+{% block title %}Поиск{% endblock %}
 
 {% block content %} {% if query %}
     <h1>
-        Posts containing "{{ query }}"
+        Результаты поиска по запросу "{{ query }}"
     </h1>
     <h3>
-        {% with results.count as total_results %}
-            Found {{ total_results }} result{{ total_results|pluralize }} {% endwith %}
+        Найдено постов: {{ results.count }}
     </h3>
     <hr class="mt-1 mb-1"/>
     {% for post in results %}
@@ -17,14 +16,14 @@
             </a>
         </h4>
         {{ post.body|markdown|truncatewords_html:12 }} {% empty %}
-        <p>There are no results for your query.</p>
+        <p>Ничего не найдено...</p>
     {% endfor %}
-    <p><a href="{% url "blog:post_search" %}">Search again</a></p> {% else %}
+    <p><a href="{% url "blog:post_search" %}">Искать снова</a></p> {% else %}
     <h1>
-        Search for posts
+        Поиск постов
     </h1>
     <form method="get">
         {{ form.query }}
-        <input type="submit" value="Search" class="btn btn-primary mb-3 btn-lg">
+        <input type="submit" value="Искать!" class="btn btn-primary mb-3 btn-lg">
     </form>
 {% endif %} {% endblock %}

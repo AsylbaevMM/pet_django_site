@@ -13,7 +13,7 @@
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/">My First Blog Django 4</a>
+        <a class="navbar-brand" href="/">Блог об этом блоге </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
@@ -23,9 +23,9 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'users-profile' %}"><img
                             class="rounded-circle" width="30" src="{{ user.profile.avatar.url }}"/> {{ user.username }}
                     </a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log In</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -52,20 +52,22 @@
         <!-- Widgets-->
         <div class="col-lg-4">
             <div class="card mb-4">
-                <div class="card-header">This is my blog.</div>
+                <div class="card-header">Приветствую, дорогой читатель!</div>
                 <div class="card-body">
-                    I've written {% total_posts %} posts so far.
+                    Этот сайт написан мной на Django 4 и рассказывает о том, как я его писал и что использовал. <br>
+                    Опубликовано постов: {% total_posts %}.<br>
+                    Комментариев к ним: {% total_comments %}.
                 </div>
             </div>
             <!-- Search widget-->
             <div class="card mb-4">
-                <div class="card-header">Search</div>
+                <div class="card-header">Поиск</div>
                 <div class="card-body">
                     <div class="input-group">
                         <form action="/search/" method="get" class="input-group">
-                            <input type="text" name="query" class="form-control" placeholder="Enter search term..."
+                            <input type="text" name="query" class="form-control" placeholder="Что будем искать?"
                                    required="" id="id_query">
-                            <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+                            <button class="btn btn-primary" id="button-search" type="submit">Искать!</button>
                         </form>
                     </div>
                 </div>
@@ -74,7 +76,7 @@
             <div class="card mb-4">
                 <div class="list-group">
                     <a class="list-group-item list-group-item-action active" aria-current="true">
-                        Latest posts
+                        Свежайшие посты
                     </a>
                     {% show_latest_posts 3 %}
                 </div>
@@ -82,7 +84,7 @@
             <div class="card mb-4">
                 <div class="list-group">
                     <a class="list-group-item list-group-item-action active" aria-current="true">
-                        Most commented posts
+                        Самые комментируемые посты
                     </a>
                     {% get_most_commented_posts as most_commented_posts %}
                     {% for post in most_commented_posts %}
@@ -96,8 +98,11 @@
 </div>
 <!-- Footer-->
 <footer class="py-5 bg-dark mt-2">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; AsylbaevMM Website 2023, Powered by
-        Django</p></div>
+    <div class="container"><p class="m-0 text-center text-white">Марат Асылбаев
+        <a class="nav-link" href="https://t.me/raise_UsernameError">Telegram</a>
+        <a class="nav-link" href="https://github.com/AsylbaevMM/">GitHub</a>
+        Copyright &copy; AsylbaevMM Website 2023, Powered by Django
+    </p></div>
 </footer>
 </body>
 </html>

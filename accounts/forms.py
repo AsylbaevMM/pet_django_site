@@ -7,17 +7,17 @@ from django_summernote.widgets import SummernoteWidget
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={"class": "form-control mb-1", 'placeholder': 'Enter First Name'}))
+        attrs={"class": "form-control mb-1", 'placeholder': 'Иван'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={"class": "form-control mb-1", 'placeholder': 'Enter Last Name'}))
+        attrs={"class": "form-control mb-1", 'placeholder': 'Иванов'}))
     username = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={"class": "form-control mb-1", 'placeholder': 'Enter Username'}))
+        attrs={"class": "form-control mb-1", 'placeholder': 'Username'}))
     email = forms.EmailField(
-        widget=forms.TextInput(attrs={"class": "form-control mb-1", 'placeholder': 'Enter your E-Mail'}))
+        widget=forms.TextInput(attrs={"class": "form-control mb-1", 'placeholder': 'example@mail.com'}))
     password1 = forms.CharField(max_length=50, widget=forms.PasswordInput(
-        attrs={"class": "form-control mb-1", 'placeholder': 'Enter password'}))
+        attrs={"class": "form-control mb-1", 'placeholder': '*********'}))
     password2 = forms.CharField(max_length=50, widget=forms.PasswordInput(
-        attrs={"class": "form-control mb-1", 'placeholder': 'Confirm Password'}))
+        attrs={"class": "form-control mb-1", 'placeholder': '*********'}))
 
     class Meta:
         model = User
@@ -27,11 +27,11 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=100,
                                required=True,
-                               widget=forms.TextInput(attrs={"class": "form-control mb-1", 'placeholder': 'Username'}))
+                               widget=forms.TextInput(attrs={"class": "form-control mb-1", 'placeholder': 'Логин'}))
     password = forms.CharField(max_length=50,
                                required=True,
                                widget=forms.PasswordInput(
-                                   attrs={"class": "form-control mb-1", 'placeholder': 'Password'}))
+                                   attrs={"class": "form-control mb-1", 'placeholder': 'Пароль'}))
     remember_me = forms.BooleanField(required=False)
 
     class Meta:

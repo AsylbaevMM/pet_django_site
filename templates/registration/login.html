@@ -1,16 +1,19 @@
 {% extends "blog/base.html" %}
-{% block title %} Login {% endblock %}
+{% block title %} Вход {% endblock %}
 {% block content %}
-    <h2> Login </h2>
-    <a href="{% url 'signup' %}"  class="btn btn-link btn-lg active btn-block">SignUp</a>
-    <a href="{% url 'social:begin' 'github' %}"  class="btn btn-link btn-lg active btn-block">Sign in with GitHub</a>
-    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-link btn-lg active btn-block">Sign in with Google</a>
+    <h2> Авторизация </h2>
+    <br>
     <form method="post" class="form">
         {{ form.username }}
         {{ form.password }}
-        <div class="mb-1">Remember me: {{ form.remember_me }}</div>
+        <div class="mb-1">Запомнить меня: {{ form.remember_me }}</div>
         {% csrf_token %}
-        <input type="submit" class="btn btn-primary btn-lg" value="Login">
+        <input type="submit" class="btn btn-primary btn-lg" value="Войти">
+        <a class="btn" href="{% url 'social:begin' 'github' %}"> <img width="35" src="/media/github_logo.png"> </a>
+        <a class="btn" href="{% url 'social:begin' 'google-oauth2' %}"> <img width="35"
+                                                                             src="/media/google-plus-logo.png"> </a>
     </form>
-   <a href="{% url 'password_reset' %}">Reset Password</a>
+    <a href="{% url 'password_reset' %}">Забыли пароль? Восстановить</a>
+    <br>
+    <a href="{% url 'signup' %}">Нет аккаунта? Регистрация</a>
 {% endblock %}

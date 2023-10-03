@@ -96,7 +96,12 @@ def post_comment(request, post_id):
                              status=Post.Status.PUBLISHED)
     comment = None
     # Комментарий был отправлен
-    form = CommentForm(data=request.POST)
+    #form = CommentForm(data=request.POST)
+    comment_post = request.POST.copy()
+    if request.user.is_authenticated:
+        comment_post['name'] = request.user.username
+        comment_post['email'] = request.user.email or 'from_github@github.com'
+    form = CommentForm(data=comment_post)
     if form.is_valid():
         # Создать объект класса Comment, не сохраняя его в базе данных
         comment = form.save(commit=False)
@@ -104,11 +109,22 @@ def post_comment(request, post_id):
         comment.post = post
         # Сохранить комментарий в базе данных
         comment.save()
-    return render(request, 'blog/post/comment.html',
+    # return render(request, 'blog/post/comment.html',
+    #               {'post': post,
+    #                'form': form,
+    #                'comment': comment})
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    comments = post.comments.filter(active=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
+    return render(request,
+                  'blog/post/detail.html',
                   {'post': post,
+                   'comments': comments,
                    'form': form,
-                   'comment': comment})
-
+                   'similar_posts': similar_posts,
+                   'messages': ["Комментарий добавлен"],}
+                  )
 
 def post_search(request):
     form = SearchForm()

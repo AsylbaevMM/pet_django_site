@@ -1,16 +1,20 @@
 <form action="{% url "blog:post_comment" post.id %}" method="post">
     {% csrf_token %}
     <div class="row">
-        <h3>Add a new comment</h3>
-        <div class="col mt-2">
-            {{ form.name }}
-        </div>
-        <div class="col mt-2">
-            {{ form.email }}
-        </div>
+{% if user.is_authenticated %}
+            <h3>Добавьте комментарий, {{ user.username }}</h3>
+        {% else %}
+            <h3>Добавить комментарий</h3>
+            <div class="col mt-2">
+                {{ form.name }}
+            </div>
+            <div class="col mt-2">
+                {{ form.email }}
+            </div>
+        {% endif %}
         <div class="mt-2">
             {{ form.body }}
-            <input type="submit" class="btn btn-primary mb-3" value="Add comment">
+            <input type="submit" class="btn btn-primary mb-3" value="Отправить комментарий">
         </div>
     </div>
 </form>
