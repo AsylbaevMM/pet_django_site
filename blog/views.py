@@ -96,8 +96,8 @@ def post_comment(request, post_id):
                              status=Post.Status.PUBLISHED)
     comment = None
     # Комментарий был отправлен
-    #form = CommentForm(data=request.POST)
     comment_post = request.POST.copy()
+    # Проверка на авторизацию пользователя
     if request.user.is_authenticated:
         comment_post['name'] = request.user.username
         comment_post['email'] = request.user.email or 'from_github@github.com'
