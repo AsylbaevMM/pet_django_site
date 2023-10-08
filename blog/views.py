@@ -14,7 +14,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 
 def post_list(request, tag_slug=None):
-    post_list = Post.published.all()
+    post_list = Post.published.all().order_by('publish')
 
     tag = None
     if tag_slug:
@@ -138,6 +138,11 @@ def post_search(request):
             results = Post.published.annotate(
                 similarity=TrigramSimilarity('title', query),
             ).filter(similarity__gt=0.1).order_by('-similarity')
+            if not results:
+                results = Post.published.annotate(
+                    search=SearchVector('body', 'title'),
+                    rank=SearchRank(SearchVector('body', 'title'), SearchQuery(query))
+                ).filter(search=SearchQuery(query)).order_by('-rank')
 
     return render(request,
                   'blog/post/search.html',
